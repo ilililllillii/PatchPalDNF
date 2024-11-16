@@ -22,6 +22,7 @@ namespace PatchPalDNF
     {
         public MainWindow()
         {
+            //尝试推送 另外 SCJ大牛逼！
             InitializeComponent();
         }
     }

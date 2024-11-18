@@ -25,6 +25,7 @@ namespace PatchPalDNF
         MainViewModel MainViewModel = new MainViewModel(); 
         public MainWindow()
         {
+            //scj保我推送成功，草
             InitializeComponent();
             this.DataContext = MainViewModel;
         }

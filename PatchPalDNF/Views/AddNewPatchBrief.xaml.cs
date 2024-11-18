@@ -1,5 +1,4 @@
 ﻿using PatchPalDNF.ViewModel;
-using PatchPalDNF.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,21 +11,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PatchPalDNF
+namespace PatchPalDNF.Views
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// AddNewPatchBrief.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddNewPatchBrief : Window
     {
-        MainViewModel MainViewModel = new MainViewModel(); 
-        public MainWindow()
+        public AddNewPatchBrief()
         {
             InitializeComponent();
-            this.DataContext = MainViewModel;
         }
     }
 }

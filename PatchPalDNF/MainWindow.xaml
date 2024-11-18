@@ -3,10 +3,56 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PatchPalDNF"
+        xmlns:local="clr-namespace:PatchPalDNF.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="1100"
+        WindowStartupLocation="CenterScreen">
+ 
     <Grid>
-        
+        <!-- 主布局 -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/> <!-- 左侧导航栏 -->
+            <ColumnDefinition Width="*"/>   <!-- 主内容区域 -->
+        </Grid.ColumnDefinitions>
+
+        <!-- 左侧导航栏 -->
+        <Border Grid.Column="0">
+            <StackPanel Margin="10">
+                <Button Content="补丁" />
+                <Button Content="设置" />
+                <Button Content="关于" />
+            </StackPanel>
+        </Border>
+
+        <!-- 主内容区域 -->
+        <Grid Grid.Column="1" Margin="10" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/> 
+                <RowDefinition/>               
+            </Grid.RowDefinitions>
+
+            <!-- 搜索栏 -->
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10,0" VerticalAlignment="Center">
+                <TextBox Width="700" Height="40" VerticalAlignment="Center"
+                         FontSize="16" Text="曾经有个非常沙雕的补丁在我面前，我没有珍惜，到后来我才后悔莫及。"/>
+                <Button Content="搜索" Width="80" Height="40" FontSize="16" 
+                        HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"/>
+            </StackPanel>
+
+            <!-- 补丁卡片展示 -->
+            <Grid Grid.Row="1" Margin="10,20,10,10">
+                <ScrollViewer  VerticalScrollBarVisibility="Auto">
+                    <WrapPanel x:Name="wrapPanel" ItemWidth="200" ItemHeight="200" Margin="5">
+                    <!-- 使用自定义控件装填区 -->
+                        <local:PatchBrief></local:PatchBrief>
+                        <local:PatchBrief></local:PatchBrief>
+                        <local:PatchBrief></local:PatchBrief>
+                        <local:PatchBrief></local:PatchBrief>
+                    </WrapPanel>
+                </ScrollViewer>
+                <Button Content="+" Width="50" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20" Command="{Binding OpenWindowCommand}"  ></Button>
+            </Grid>
+            
+        </Grid>
     </Grid>
 </Window>

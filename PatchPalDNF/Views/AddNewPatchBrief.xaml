@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PatchPalDNF.Views"
         mc:Ignorable="d"
-        Title="这tm是一个新的" Height="500" Width="500">
+        Title="这tm是一个新的" Height="500" Width="500" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -19,29 +19,28 @@
         <StackPanel Margin="10">
             <!-- 名称 -->
             <TextBlock Text="补丁名称" Margin="10"></TextBlock>
-            <TextBox Text="沙雕补丁" Margin="10"/>
+            <TextBox Text="{Binding PatchModel.NpkName}" Margin="10"/>
 
             <!-- 描述 -->
             <TextBlock  Text="补丁描述" Margin="10"/>
-            <TextBox  Text="此补丁只应TM天上有，人间难得TM见会啊。。。" Margin="10"/>
+            <TextBox  Text="{Binding PatchModel.NpkDescribe}" Margin="10"/>
         </StackPanel>
         <!-- 图片 -->
         <Image Grid.Column="1"  Width="150" Height="150" 
-            Source="/Image/wjz.jpg" Stretch="UniformToFill"  />
+            Source="{Binding PatchModel.NpkImage}" Stretch="UniformToFill" />
 
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+        <StackPanel  Grid.Row="1" Grid.ColumnSpan="2">
             <!-- NPK文件列表 -->
-            <StackPanel>
-                <TextBlock  Text="只应天上有的沙雕补丁.npk" Margin="10"/>
-                <TextBlock  Text="只应天上有的沙雕补丁.npk" Margin="10"/>
-                <TextBlock  Text="只应天上有的沙雕补丁.npk" Margin="10"/>
-                <TextBlock  Text="只应天上有的沙雕补丁.npk" Margin="10"/>
-                <TextBlock  Text="只应天上有的沙雕补丁.npk" Margin="10"/>
-                <TextBlock  Text="只应天上有的沙雕补丁.npk" Margin="10"/>
-                <TextBlock  Text="只应天上有的沙雕补丁.npk" Margin="10"/>
-                <TextBlock  Text="只应天上有的沙雕补丁.npk" Margin="10"/>
+            <Grid Background="#FFE6DFDF" Margin="10" Height="80" AllowDrop="True"  Drop="Grid_Drop">
+                <TextBlock Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Text="文件拖拽到此处" >
+
+                </TextBlock>
                 
-            </StackPanel>
+            </Grid>
+            <ScrollViewer  VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="stackPanel"  Margin="5" />
+            </ScrollViewer>
+            
         </StackPanel>
         <WrapPanel  Grid.Row="2" Grid.ColumnSpan="2" Margin="5" HorizontalAlignment="Right">
             <Button Command="{Binding CancelCommand}" Content="取消" />

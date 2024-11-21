@@ -22,12 +22,10 @@ namespace PatchPalDNF
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainViewModel MainViewModel = new MainViewModel(); 
         public MainWindow()
         {
-            //scj保我推送成功，草
             InitializeComponent();
-            this.DataContext = MainViewModel;
+            this.DataContext = new MainViewModel();
         }
     }
 }

@@ -1,18 +1,39 @@
 ﻿using PatchPalDNF.Command;
+using PatchPalDNF.Models;
 using PatchPalDNF.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using static System.Net.WebRequestMethods;
 
 namespace PatchPalDNF.ViewModel
 {
-    public class AddNewPatchBriefViewModel
+    public class AddNewPatchBriefViewModel : INotifyPropertyChanged
     {
         private readonly AddNewPatchBrief _addNewPatchBrief;
+
+        private ObservableCollection<PatchModel> _patchBriefs;
+
+        private PatchModel _patchModel;
+        public PatchModel PatchModel
+        { 
+            get 
+            {
+                if (_patchModel == null)
+                {
+                    _patchModel = new PatchModel();
+                }
+                return _patchModel; 
+            }
+            set { _patchModel = value; }
+        }
 
         // 取消命令
         public ICommand CancelCommand { get; }
@@ -20,13 +41,17 @@ namespace PatchPalDNF.ViewModel
         // 确定命令
         public ICommand SureCommand { get; }
 
-        public AddNewPatchBriefViewModel(AddNewPatchBrief addNewPatchBrief)
+        // 命令处理 Drop 事件
+        public ICommand DropCommand { get; }
+
+        public AddNewPatchBriefViewModel(AddNewPatchBrief addNewPatchBrief, ObservableCollection<PatchModel> patchModels)
         {
             _addNewPatchBrief = addNewPatchBrief;
-
+            _patchBriefs = patchModels;
             // 初始化命令
             CancelCommand = new RelayCommand(IsCancel);
             SureCommand = new RelayCommand(IsSure);
+            DropCommand = new RelayCommand(OnDrop);
         }
 
         /// <summary>
@@ -38,13 +63,54 @@ namespace PatchPalDNF.ViewModel
             _addNewPatchBrief.Close();
         }
 
+        
         /// <summary>
         /// 确定操作
         /// </summary>
         private void IsSure(object parameter)
         {
-            // 在这里处理确定逻辑
-            // 例如，可以执行保存操作，关闭窗口等
+            //复制文件逻辑
+            string targetFolder = @"E:\scjTest\";
+
+            if (!Directory.Exists(targetFolder))
+            {
+                Directory.CreateDirectory(targetFolder);
+            }
+
+            foreach (var file in List)
+            {
+                try
+                {
+                    string fileName = Path.GetFileName(file);
+                    string targetPath = Path.Combine(targetFolder, fileName);
+                    System.IO.File.Copy(file, targetPath, true);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"文件复制失败: {ex.Message}");
+                }
+            }
+
+            //生成卡片逻辑
+            _patchBriefs.Add(new PatchModel
+            {
+                NpkName = PatchModel.NpkName,
+                NpkUrl = PatchModel.NpkUrl,
+                NpkDescribe = PatchModel.NpkDescribe,
+                NpkImage = PatchModel.NpkImage,
+                NpkLocalURL = List
+            });
+            _addNewPatchBrief.Close();
+        }
+
+        List<string> List = new List<string>();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Drop 事件的处理方法
+        private void OnDrop(object parameter)
+        {
+            List = (List<string>)parameter;
         }
     }
 }

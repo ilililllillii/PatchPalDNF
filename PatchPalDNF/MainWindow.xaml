@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1100"
         WindowStartupLocation="CenterScreen">
- 
     <Grid>
         <!-- 主布局 -->
         <Grid.ColumnDefinitions>
@@ -42,17 +41,22 @@
             <!-- 补丁卡片展示 -->
             <Grid Grid.Row="1" Margin="10,20,10,10">
                 <ScrollViewer  VerticalScrollBarVisibility="Auto">
-                    <WrapPanel x:Name="wrapPanel" ItemWidth="200" ItemHeight="200" Margin="5">
-                    <!-- 使用自定义控件装填区 -->
-                        <local:PatchBrief></local:PatchBrief>
-                        <local:PatchBrief></local:PatchBrief>
-                        <local:PatchBrief></local:PatchBrief>
-                        <local:PatchBrief></local:PatchBrief>
-                    </WrapPanel>
+                    <ItemsControl ItemsSource="{Binding PatchBriefs}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <local:PatchBrief/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <!-- 此处设置面板，使得布局为方块。写在外面有问题 -->
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
                 </ScrollViewer>
                 <Button Content="+" Width="50" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20" Command="{Binding OpenWindowCommand}"  ></Button>
             </Grid>
-            
         </Grid>
     </Grid>
 </Window>

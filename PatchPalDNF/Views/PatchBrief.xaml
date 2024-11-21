@@ -18,17 +18,17 @@
             </Grid.ColumnDefinitions>
 
             <!-- 补丁名称 -->
-            <TextBlock Grid.Row="0" Grid.Column="0" FontSize="14" FontWeight="Bold" Text="补丁名称" VerticalAlignment="Center" />
+            <TextBlock Grid.Row="0" Grid.Column="0" FontSize="14" FontWeight="Bold" Text="{Binding NpkName}" VerticalAlignment="Center" />
 
             <!-- 按钮 -->
             <Button Grid.Row="0" Grid.Column="2" Width="50" Height="20" VerticalAlignment="Center" Content="爱用不用" HorizontalAlignment="Right"/>
 
             <!-- 图片 -->
             <Image Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Width="150" Height="150" Margin="5"
-                   Source="/Image/wjz.jpg" Stretch="UniformToFill" />
+                   Source="{Binding NpkImage}" Stretch="UniformToFill" />
 
             <!-- 描述 -->
-            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="此补丁只应TM天上有，人间难得TM见会啊。。。"
+            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding NpkDescribe}"
                        TextWrapping="Wrap" Margin="5,0,0,0" VerticalAlignment="Bottom" />
         </Grid>
     </Border>

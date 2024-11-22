@@ -19,20 +19,50 @@
         <StackPanel Margin="10">
             <!-- 名称 -->
             <TextBlock Text="补丁名称" Margin="10"></TextBlock>
-            <TextBox Text="{Binding PatchModel.NpkName}" Margin="10"/>
+            <TextBox Text="{Binding NpkName}" Margin="10"/>
 
             <!-- 描述 -->
             <TextBlock  Text="补丁描述" Margin="10"/>
-            <TextBox  Text="{Binding PatchModel.NpkDescribe}" Margin="10"/>
+            <TextBox  Text="{Binding NpkDescribe}" Margin="10"/>
         </StackPanel>
         <!-- 图片 -->
-        <Image Grid.Column="1"  Width="150" Height="150" 
-            Source="{Binding PatchModel.NpkImage}" Stretch="UniformToFill" />
+        <!--<Image Grid.Column="1"  Width="150" Height="150" 
+            Source="{Binding PatchModel.NpkImage}" Stretch="UniformToFill" />-->
+
+        <Grid Grid.Column="1" AllowDrop="True"  Drop="Image_Drop">
+            <!-- 图片展示控件 -->
+            <Image x:Name="image" Width="150" Height="150" 
+                   Source="{Binding NpkImage}" 
+                   Stretch="UniformToFill"
+                   />
+            <!-- 提示文本 -->
+            <TextBlock Text="拖拽图片到此处" 
+               VerticalAlignment="Center" HorizontalAlignment="Center" 
+               FontSize="14" Foreground="Gray" >
+                <!--<TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            --><!-- 当有图片路径时隐藏 TextBlock --><!--
+                            <DataTrigger Binding="{Binding NpkImage}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding NpkImage}" Value="">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding NpkImage}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>-->
+            </TextBlock>
+        </Grid>
 
         <StackPanel  Grid.Row="1" Grid.ColumnSpan="2">
             <!-- NPK文件列表 -->
             <Grid Background="#FFE6DFDF" Margin="10" Height="80" AllowDrop="True"  Drop="Grid_Drop">
-                <TextBlock Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Text="文件拖拽到此处" >
+                <TextBlock Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Text="文件拖拽到此处" >
 
                 </TextBlock>
                 

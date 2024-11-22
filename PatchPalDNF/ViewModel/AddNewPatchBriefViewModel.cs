@@ -21,18 +21,55 @@ namespace PatchPalDNF.ViewModel
 
         private ObservableCollection<PatchModel> _patchBriefs;
 
-        private PatchModel _patchModel;
-        public PatchModel PatchModel
-        { 
-            get 
+        private PatchModel PatchModel = new PatchModel();
+
+        /// <summary>
+        /// 名称
+        /// </summary>
+        public string NpkName
+        {
+            get => PatchModel.NpkName;
+            set
             {
-                if (_patchModel == null)
-                {
-                    _patchModel = new PatchModel();
-                }
-                return _patchModel; 
+                PatchModel.NpkName = value;
+                OnPropertyChanged(nameof(NpkName));
             }
-            set { _patchModel = value; }
+        }
+        /// <summary>
+        /// npk源连接
+        /// </summary>
+        public string NpkUrl
+        {
+            get => PatchModel.NpkUrl;
+            set
+            {
+                PatchModel.NpkUrl = value;
+                OnPropertyChanged(nameof(NpkUrl));
+            }
+        }
+        /// <summary>
+        /// npk描述
+        /// </summary>
+        public string NpkDescribe
+        {
+            get => PatchModel.NpkDescribe;
+            set
+            {
+                PatchModel.NpkDescribe = value;
+                OnPropertyChanged(nameof(NpkDescribe));
+            }
+        }
+        /// <summary>
+        /// npk效果图
+        /// </summary>
+        public string NpkImage
+        {
+            get => PatchModel.NpkImage;
+            set
+            {
+                PatchModel.NpkImage = value;
+                OnPropertyChanged(nameof(NpkImage));
+            }
         }
 
         // 取消命令
@@ -106,6 +143,11 @@ namespace PatchPalDNF.ViewModel
         List<string> List = new List<string>();
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         // Drop 事件的处理方法
         private void OnDrop(object parameter)

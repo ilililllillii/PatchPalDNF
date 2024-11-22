@@ -64,5 +64,28 @@ namespace PatchPalDNF.Views
                 viewModel.DropCommand.Execute(fileList);
             }
         }
+
+        private void Image_Drop(object sender, DragEventArgs e)
+        {
+            // 获取拖拽的文件
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files != null && files.Length > 0 && IsImageFile(files[0]))
+                {
+                    // 更新 ViewModel 中的图片路径
+                    var viewModel = (AddNewPatchBriefViewModel)DataContext;
+                    viewModel.NpkImage = files[0];
+                }
+            }
+        }
+
+        // 判断是否为图片文件
+        private bool IsImageFile(string filePath)
+        {
+            string[] imageExtensions = { ".jpg", ".jpeg", ".png", ".bmp", ".gif" };
+            string fileExtension = System.IO.Path.GetExtension(filePath)?.ToLower();
+            return imageExtensions.Contains(fileExtension);
+        }
     }
 }

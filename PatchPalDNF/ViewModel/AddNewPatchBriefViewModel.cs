@@ -1,5 +1,6 @@
 ﻿using PatchPalDNF.Command;
 using PatchPalDNF.Models;
+using PatchPalDNF.Server;
 using PatchPalDNF.Views;
 using System;
 using System.Collections.Generic;
@@ -137,6 +138,10 @@ namespace PatchPalDNF.ViewModel
                 NpkImage = PatchModel.NpkImage,
                 NpkLocalURL = List
             });
+
+            //保存数据
+            new DataServer().SavePatches(new List<PatchModel>(_patchBriefs));
+
             _addNewPatchBrief.Close();
         }
 

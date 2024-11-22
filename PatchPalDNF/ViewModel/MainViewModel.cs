@@ -13,6 +13,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
+using System.IO;
+using Newtonsoft.Json;
+using PatchPalDNF.Server;
 
 namespace PatchPalDNF.ViewModel
 {
@@ -38,15 +41,7 @@ namespace PatchPalDNF.ViewModel
         public MainViewModel()
         {
             OpenWindowCommand = new RelayCommand(OpenWindow);
-            PatchBriefs = new ObservableCollection<PatchModel>
-            {
-                new PatchModel{NpkName = "补丁1", NpkUrl = "aaaaa",NpkDescribe ="沙雕补丁1",NpkImage = "/image/wjz.jpg",NpkLocalURL = new List<string>{ "1","2" }},
-                new PatchModel{NpkName = "补丁2", NpkUrl = "bbbbb",NpkDescribe ="沙雕补丁2",NpkImage = "/image/wjz.jpg",NpkLocalURL = new List<string>{ "1","2" }},
-                new PatchModel{NpkName = "补丁3", NpkUrl = "ccccc",NpkDescribe ="沙雕补丁3",NpkImage = "/image/wjz.jpg",NpkLocalURL = new List<string>{ "1","2" }},
-                new PatchModel{NpkName = "补丁4", NpkUrl = "ddddd",NpkDescribe ="沙雕补丁4",NpkImage = "/image/wjz.jpg",NpkLocalURL = new List<string>{ "1","2" }},
-                new PatchModel{NpkName = "补丁5", NpkUrl = "eeeee",NpkDescribe ="沙雕补丁5",NpkImage = "/image/wjz.jpg",NpkLocalURL = new List<string>{ "1","2" }},
-
-            };
+            PatchBriefs = new ObservableCollection<PatchModel>(new DataServer().LoadPatches());
         }
 
         /// <summary>
@@ -73,7 +68,6 @@ namespace PatchPalDNF.ViewModel
                 newWindow.Activate();
             }
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

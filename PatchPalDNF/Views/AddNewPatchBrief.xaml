@@ -39,23 +39,20 @@
             <TextBlock Text="拖拽图片到此处" 
                VerticalAlignment="Center" HorizontalAlignment="Center" 
                FontSize="14" Foreground="Gray" >
-                <!--<TextBlock.Style>
+                <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible" />
                         <Style.Triggers>
-                            --><!-- 当有图片路径时隐藏 TextBlock --><!--
                             <DataTrigger Binding="{Binding NpkImage}" Value="{x:Null}">
                                 <Setter Property="Visibility" Value="Visible" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding NpkImage}" Value="">
-                                <Setter Property="Visibility" Value="Visible" />
-                            </DataTrigger>
+
                             <DataTrigger Binding="{Binding NpkImage}">
                                 <Setter Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </TextBlock.Style>-->
+                </TextBlock.Style>
             </TextBlock>
         </Grid>
 

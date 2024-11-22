@@ -29,5 +29,9 @@ namespace PatchPalDNF.Models
         /// npk本地路径
         /// </summary>
         public List<string> NpkLocalURL { get; set; }
+        /// <summary>
+        /// npk是否启用
+        /// </summary>
+        public bool NpkStatus { get; set; }
     }
 }

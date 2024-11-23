@@ -86,7 +86,7 @@ namespace PatchPalDNF.ViewModel
         {
             _addNewPatchBrief = addNewPatchBrief;
             _patchBriefs = patchModels;
-            // 初始化命令
+
             CancelCommand = new RelayCommand(IsCancel);
             SureCommand = new RelayCommand(IsSure);
             DropCommand = new RelayCommand(OnDrop);
@@ -107,20 +107,14 @@ namespace PatchPalDNF.ViewModel
         /// </summary>
         private void IsSure(object parameter)
         {
-            //复制文件逻辑
-            string targetFolder = @"E:\scjTest\";
-
-            if (!Directory.Exists(targetFolder))
-            {
-                Directory.CreateDirectory(targetFolder);
-            }
+            if (string.IsNullOrWhiteSpace(MainViewModel.DnfFilePath)) return;
 
             foreach (var file in List)
             {
                 try
                 {
                     string fileName = Path.GetFileName(file);
-                    string targetPath = Path.Combine(targetFolder, fileName);
+                    string targetPath = Path.Combine(MainViewModel.DnfFilePath, fileName);
                     System.IO.File.Copy(file, targetPath, true);
                 }
                 catch (Exception ex)

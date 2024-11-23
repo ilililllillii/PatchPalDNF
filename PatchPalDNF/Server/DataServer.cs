@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PatchPalDNF.Models;
+using PatchPalDNF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,16 +12,14 @@ namespace PatchPalDNF.Server
 {
     public class DataServer
     {
-        private string filePath = @"E:\scjTest\patches.json"; // 数据文件路径
-
         /// <summary>
         /// 从文件加载数据
         /// </summary>
         public List<PatchModel> LoadPatches()
         {
-            if (File.Exists(filePath))
+            if (File.Exists(MainViewModel.JsonFilePath))
             {
-                string json = File.ReadAllText(filePath);
+                string json = File.ReadAllText(MainViewModel.JsonFilePath);
                 return JsonConvert.DeserializeObject<List<PatchModel>>(json) ?? new List<PatchModel>();
                  
             }
@@ -33,7 +32,7 @@ namespace PatchPalDNF.Server
         public void SavePatches(List<PatchModel> PatchList)
         {
             string json = JsonConvert.SerializeObject(PatchList, Formatting.Indented);
-            File.WriteAllText(filePath, json);
+            File.WriteAllText(MainViewModel.JsonFilePath, json);
         }
     }
 }

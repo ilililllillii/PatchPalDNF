@@ -33,15 +33,16 @@
             <!-- 搜索栏 -->
             <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10,0" VerticalAlignment="Center">
                 <TextBox Width="700" Height="40" VerticalAlignment="Center"
-                         FontSize="16" Text="曾经有个非常沙雕的补丁在我面前，我没有珍惜，到后来我才后悔莫及。"/>
+                         FontSize="16" Text="{Binding QueryText}"/>
                 <Button Content="搜索" Width="80" Height="40" FontSize="16" 
-                        HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"/>
+                        HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"
+                        Command="{Binding SearchCommand}"/>
             </StackPanel>
 
             <!-- 补丁卡片展示 -->
             <Grid Grid.Row="1" Margin="10,20,10,10">
                 <ScrollViewer  VerticalScrollBarVisibility="Auto">
-                    <ItemsControl ItemsSource="{Binding PatchBriefs}">
+                    <ItemsControl ItemsSource="{Binding PatchBriefsView}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <local:PatchBrief/>

@@ -100,9 +100,14 @@ namespace PatchPalDNF.ViewModel
         // 检索功能
         private void Search(object parameter)
         {
+
             _patchBriefsView.Filter = obj =>
             {
                 var patch = obj as PatchModel;
+                if (QueryText == null)
+                {
+                    QueryText = "";
+                }
                 return patch != null && patch.NpkName.Contains(QueryText);
             };
         }

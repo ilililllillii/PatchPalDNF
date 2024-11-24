@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:PatchPalDNF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="Style/Styles.xaml"/>
     </Application.Resources>
 </Application>

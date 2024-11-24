@@ -27,5 +27,11 @@ namespace PatchPalDNF
             InitializeComponent();
             this.DataContext = new MainViewModel();
         }
+
+        private void DragMoveWindow(object sender, System.Windows.Input.MouseButtonEventArgs e)
+           => DragMove();
+
+        private void CloseSettingsWindow(object sender, RoutedEventArgs e)
+            => Close();
     }
 }

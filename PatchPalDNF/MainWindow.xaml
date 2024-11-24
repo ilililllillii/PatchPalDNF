@@ -5,38 +5,132 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PatchPalDNF.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1100"
-        WindowStartupLocation="CenterScreen">
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="#FF292622"
+        Height="600" Width="1100">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <!-- 主布局 -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/> <!-- 左侧导航栏 -->
-            <ColumnDefinition Width="*"/>   <!-- 主内容区域 -->
+            <ColumnDefinition Width="200"/>
+            <!-- 左侧导航栏 -->
+            <ColumnDefinition Width="*"/>
+            <!-- 主内容区域 -->
         </Grid.ColumnDefinitions>
 
+        <!-- 标题栏 -->
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Height="35">
+            <Border BorderThickness="2" 
+                    MouseLeftButtonDown="DragMoveWindow">
+                <Border.BorderBrush>
+                    <RadialGradientBrush RadiusX=".65"
+                                         RadiusY="1.2"
+                                         Center=".5, -.1"
+                                         GradientOrigin=".5, -.1">
+                        <GradientStop Offset="0" Color="#FF5883C9" />
+                        <GradientStop Offset="1" Color="#FF0B2034" />
+                    </RadialGradientBrush>
+                </Border.BorderBrush>
+                <Border.Background>
+                    <RadialGradientBrush RadiusX="1" RadiusY="1.2" Center=".5, -.1" GradientOrigin=".5, -.1">
+                        <GradientStop Offset="0" Color="#FF2C5597" />
+                        <GradientStop Offset="1" Color="#FF020E1B" />
+                    </RadialGradientBrush>
+                </Border.Background>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="Black" />
+                </Border.Effect>
+            </Border>
+            <TextBlock Text="补丁助手"
+                       FontFamily="../Assets/#GasinamuNew"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       TextAlignment="Center"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="#FF84754D" />
+            <Button HorizontalAlignment="Right"
+                    Style="{StaticResource WithoutButtonStyle}"
+                    BorderThickness="0"
+                    Padding="0"
+                    Click="CloseSettingsWindow"
+                    Margin="0, 0, 5, 0">
+                <Viewbox Width="25" Height="25">
+                    <Canvas Width="24" Height="24">
+                        <Path Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}"
+                            Data="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" />
+                    </Canvas>
+                </Viewbox>
+            </Button>
+        </Grid>
+
         <!-- 左侧导航栏 -->
-        <Border Grid.Column="0">
+        <Border Grid.Row="1" Grid.Column="0">
             <StackPanel Margin="10">
-                <Button Content="补丁" />
-                <Button Content="设置" />
+                <Button Content="补丁" Style="{StaticResource NormalButtonStyle}" />
+                <Button Content="设置" Style="{StaticResource WithoutButtonStyle}"/>
                 <Button Content="关于" />
             </StackPanel>
         </Border>
 
         <!-- 主内容区域 -->
-        <Grid Grid.Column="1" Margin="10" >
+        <Grid Grid.Row="1" Grid.Column="1" Margin="10" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/> 
-                <RowDefinition/>               
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
 
             <!-- 搜索栏 -->
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10,0" VerticalAlignment="Center">
-                <TextBox Width="700" Height="40" VerticalAlignment="Center"
-                         FontSize="16" Text="{Binding QueryText}"/>
+            <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <!--<Border BorderBrush="#FFAB9045">
+                    <TextBox Background="#000100" Foreground="#D5C691"  
+                             Width="700" Height="40" 
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"
+                             FontSize="23" 
+                             FontWeight="Bold"
+                             Text="{Binding QueryText}"
+                             Style="{StaticResource RoundedTextBox}"/>
+                </Border>
+                
                 <Button Content="搜索" Width="80" Height="40" FontSize="16" 
                         HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"
-                        Command="{Binding SearchCommand}"/>
+                        Command="{Binding SearchCommand}"/>-->
+                <Border CornerRadius="20" Background="#000100" Padding="5" Margin="10,0">
+                    <Grid>
+                        <!-- 输入框 -->
+                        <TextBox 
+                         Background="#000100"
+                         Foreground="#D5C691"  
+                         BorderThickness="0"
+                         FontSize="14"
+                         VerticalContentAlignment="Center"
+                         FontWeight="Bold"
+                         Text="{Binding QueryText}"
+                         Margin="10,0,40,0"/>
+                        <!-- 搜索按钮 -->
+                        <Button 
+                                Style="{StaticResource WithoutButtonStyle}"
+                                Width="25"
+                                Height="25"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                BorderThickness="0"
+                                Margin="0,0,5,0"
+                                Cursor="Hand"
+                                Command="{Binding SearchCommand}" 
+                            >
+                            <Button.Background>
+                                <ImageBrush ImageSource="pack://application:,,,/Image/Search.png"/>
+                            </Button.Background>
+                        </Button>
+                    </Grid>
+                </Border>
             </StackPanel>
 
             <!-- 补丁卡片展示 -->

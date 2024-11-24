@@ -45,7 +45,7 @@
                     <ItemsControl ItemsSource="{Binding PatchBriefsView}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <local:PatchBrief/>
+                                <local:PatchBrief />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                         <!-- 此处设置面板，使得布局为方块。写在外面有问题 -->

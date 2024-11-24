@@ -116,6 +116,8 @@ namespace PatchPalDNF.ViewModel
                     string fileName = Path.GetFileName(file);
                     string targetPath = Path.Combine(MainViewModel.DnfFilePath, fileName);
                     System.IO.File.Copy(file, targetPath, true);
+                    //复制备用文件
+                    System.IO.File.Copy(file, Path.Combine(MainViewModel.DnfBackupFilePath, fileName), true);
                 }
                 catch (Exception ex)
                 {

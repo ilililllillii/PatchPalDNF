@@ -28,6 +28,9 @@ namespace PatchPalDNF.ViewModel
         public static string JsonFilePath;
         //玩家DNF文件路径
         public static string DnfFilePath;
+        //玩家DNF备用文件路径
+        public static string DnfBackupFilePath;
+
 
         //打开新窗体命令
         public ICommand OpenWindowCommand { get; set; }
@@ -53,6 +56,7 @@ namespace PatchPalDNF.ViewModel
             }
         }
 
+
         public string QueryText { get; set; }
 
         public ICollectionView PatchBriefsView
@@ -62,10 +66,11 @@ namespace PatchPalDNF.ViewModel
 
         public MainViewModel()
         {
-            initProject();
+            var data = new DataServer();
+            data.initProject();
             OpenWindowCommand = new RelayCommand(OpenWindow);
             SearchCommand = new RelayCommand(Search);
-            PatchBriefs = new ObservableCollection<PatchModel>(new DataServer().LoadPatches());
+            PatchBriefs = new ObservableCollection<PatchModel>(data.LoadPatches());
         }
 
         // 检索功能
@@ -101,47 +106,6 @@ namespace PatchPalDNF.ViewModel
                 // 如果窗口已经打开，激活它
                 newWindow.Activate();
             }
-        }
-
-        /// <summary>
-        /// 项目运行初始化
-        /// </summary>
-        private void initProject()
-        {
-            JsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PatchPalDNF_Data.json");
-            DnfFilePath = Path.Combine(GetDNFInstallPath(), "ImagePacks2");
-        }
-
-        //获取玩家DNF安装路径
-        public static string GetDNFInstallPath()
-        {
-            
-            // 检查注册表中的路径
-            string registryKey = @"SOFTWARE\Tencent\DNF";
-            string path = null;
-
-            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(registryKey))
-            {
-                if (key != null)
-                {
-                    path = key.GetValue("InstallPath") as string;
-                }
-            }
-
-            // 如果路径为空，尝试查找 64 位注册表项
-            if (string.IsNullOrEmpty(path))
-            {
-                registryKey = @"SOFTWARE\WOW6432Node\Tencent\DNF";
-                using (RegistryKey key = Registry.LocalMachine.OpenSubKey(registryKey))
-                {
-                    if (key != null)
-                    {
-                        path = key.GetValue("InstallPath") as string;
-                    }
-                }
-            }
-
-            return path;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

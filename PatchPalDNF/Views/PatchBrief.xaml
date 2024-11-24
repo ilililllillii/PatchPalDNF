@@ -21,7 +21,7 @@
             <TextBlock Grid.Row="0" Grid.Column="0" FontSize="14" FontWeight="Bold" Text="{Binding NpkName}" VerticalAlignment="Center" />
 
             <!-- 按钮 -->
-            <ToggleButton Grid.Row="0" Grid.Column="2" Width="50" Height="20" VerticalAlignment="Center" Content="爱用不用" HorizontalAlignment="Right"/>
+            <CheckBox Grid.Row="0" Grid.Column="2" IsChecked="{Binding NpkStatus}"/>
 
             <!-- 图片 -->
             <Image Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Width="150" Height="150" Margin="5"

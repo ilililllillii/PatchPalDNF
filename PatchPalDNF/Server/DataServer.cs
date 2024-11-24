@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PatchPalDNF.Server
 {
@@ -90,6 +91,55 @@ namespace PatchPalDNF.Server
         {
             string json = JsonConvert.SerializeObject(PatchList, Formatting.Indented);
             File.WriteAllText(MainViewModel.JsonFilePath, json);
+        }
+
+        /// <summary>
+        /// 启用补丁
+        /// </summary>
+        public void EnableNPK(List<string> fileName)
+        {
+            foreach (var item in fileName)
+            {
+                try
+                {
+                    string destinationPath = Path.Combine(MainViewModel.DnfFilePath, item);
+                    // 如果目标文件已存在，删除它
+                    if (File.Exists(destinationPath))
+                    {
+                        File.Delete(destinationPath);
+                    }
+
+                    // 复制补丁文件到 ImagePacks2
+                    File.Copy(Path.Combine(MainViewModel.DnfBackupFilePath, item), destinationPath);
+                    Console.WriteLine("补丁已启用");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("启用补丁时出错: " + ex.Message);
+                }
+            }
+        }
+        /// <summary>
+        /// 禁用补丁
+        /// </summary>
+        public void DisableNPK(List<string> fileName) 
+        {
+            foreach (var item in fileName)
+            {
+                try
+                {
+                    string destinationPath = Path.Combine(MainViewModel.DnfFilePath, item);
+                    // 如果目标文件已存在，删除它
+                    if (File.Exists(destinationPath))
+                    {
+                        File.Delete(destinationPath);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("禁用补丁时出错: " + ex.Message);
+                }
+            }
         }
     }
 }

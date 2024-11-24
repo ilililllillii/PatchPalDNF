@@ -37,8 +37,13 @@ namespace PatchPalDNF.ViewModel
         //检索命令
         public ICommand SearchCommand { get; set; }
 
+        public ICommand NpkStatusClickCommand { get; set; }
+
         // 将窗口声明为类级别成员变量
         private AddNewPatchBrief newWindow;
+
+        // 数据操作类
+        private DataServer dataServer;
 
         // 用于绑定过滤后的数据
         private ICollectionView _patchBriefsView;  
@@ -66,11 +71,30 @@ namespace PatchPalDNF.ViewModel
 
         public MainViewModel()
         {
-            var data = new DataServer();
-            data.initProject();
+            dataServer = new DataServer();
+            dataServer.initProject();
             OpenWindowCommand = new RelayCommand(OpenWindow);
             SearchCommand = new RelayCommand(Search);
-            PatchBriefs = new ObservableCollection<PatchModel>(data.LoadPatches());
+            NpkStatusClickCommand = new RelayCommand(NpkStatusClick);
+            PatchBriefs = new ObservableCollection<PatchModel>(dataServer.LoadPatches());
+        }
+
+        /// <summary>
+        /// 启用禁用命令
+        /// </summary>
+        /// <param name="parameter"></param>
+        private void NpkStatusClick(object parameter)
+        {
+            var patch = parameter as PatchModel;
+            var fileName = patch.NpkLocalURL.Select(x => System.IO.Path.GetFileName(x)).ToList();
+            if (patch.NpkStatus)
+            {
+                dataServer.EnableNPK(fileName); 
+            }
+            else
+            {
+                dataServer.DisableNPK(fileName);
+            }
         }
 
         // 检索功能

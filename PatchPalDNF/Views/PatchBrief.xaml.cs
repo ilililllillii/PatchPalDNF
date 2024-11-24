@@ -21,6 +21,20 @@ namespace PatchPalDNF.Views
     /// </summary>
     public partial class PatchBrief : UserControl
     {
+        // 定义向外暴露的 Command 属性
+        public static readonly DependencyProperty CommandProperty =
+            DependencyProperty.Register(
+                "Command",
+                typeof(ICommand),
+                typeof(PatchBrief),
+                new PropertyMetadata(null)
+            );
+
+        public ICommand Command
+        {
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
+        }
         public PatchBrief()
         {
             InitializeComponent();

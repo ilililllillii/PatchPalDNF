@@ -132,7 +132,8 @@ namespace PatchPalDNF.ViewModel
                 NpkUrl = PatchModel.NpkUrl,
                 NpkDescribe = PatchModel.NpkDescribe,
                 NpkImage = PatchModel.NpkImage,
-                NpkLocalURL = List
+                NpkLocalURL = List,
+                NpkStatus = true
             });
 
             //保存数据

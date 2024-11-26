@@ -87,35 +87,19 @@
 
             <!-- 搜索栏 -->
             <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <!--<Border BorderBrush="#FFAB9045">
-                    <TextBox Background="#000100" Foreground="#D5C691"  
-                             Width="700" Height="40" 
-                             VerticalAlignment="Center"
-                             HorizontalAlignment="Center"
-                             FontSize="23" 
-                             FontWeight="Bold"
-                             Text="{Binding QueryText}"
-                             Style="{StaticResource RoundedTextBox}"/>
-                </Border>
-                
-                <Button Content="搜索" Width="80" Height="40" FontSize="16" 
-                        HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"
-                        Command="{Binding SearchCommand}"/>-->
                 <Border CornerRadius="20" Background="#000100" Padding="5" Margin="10,0">
                     <Grid>
                         <!-- 输入框 -->
-                        <TextBox 
-                         Background="#000100"
-                         Foreground="#D5C691"  
-                         BorderThickness="0"
-                         FontSize="14"
-                         VerticalContentAlignment="Center"
-                         FontWeight="Bold"
-                         Text="{Binding QueryText}"
-                         Margin="10,0,40,0"/>
+                        <TextBox Background="#000100"
+                                 Foreground="#D5C691"  
+                                 BorderThickness="0"
+                                 FontSize="14"
+                                 VerticalContentAlignment="Center"
+                                 FontWeight="Bold"
+                                 Text="{Binding QueryText}"
+                                 Margin="10,0,40,0"/>
                         <!-- 搜索按钮 -->
-                        <Button 
-                                Style="{StaticResource WithoutButtonStyle}"
+                        <Button Style="{StaticResource WithoutButtonStyle}"
                                 Width="25"
                                 Height="25"
                                 HorizontalAlignment="Right"
@@ -123,8 +107,7 @@
                                 BorderThickness="0"
                                 Margin="0,0,5,0"
                                 Cursor="Hand"
-                                Command="{Binding SearchCommand}" 
-                            >
+                                Command="{Binding SearchCommand}" >
                             <Button.Background>
                                 <ImageBrush ImageSource="pack://application:,,,/Image/Search.png"/>
                             </Button.Background>
@@ -139,13 +122,14 @@
                     <ItemsControl ItemsSource="{Binding PatchBriefsView}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <local:PatchBrief Command="{Binding DataContext.NpkStatusClickCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                <local:PatchBrief Command="{Binding DataContext.NpkStatusClickCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                  PatchCommand="{Binding DataContext.PatchShowCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                         <!-- 此处设置面板，使得布局为方块。写在外面有问题 -->
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel />
+                                <WrapPanel/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>

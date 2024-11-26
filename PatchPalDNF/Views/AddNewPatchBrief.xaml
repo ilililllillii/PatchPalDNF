@@ -65,7 +65,7 @@
                 
             </Grid>
             <ScrollViewer  VerticalScrollBarVisibility="Auto">
-                <StackPanel x:Name="stackPanel"  Margin="5" />
+                <StackPanel x:Name="stackPanel" Margin="5" />
             </ScrollViewer>
             
         </StackPanel>

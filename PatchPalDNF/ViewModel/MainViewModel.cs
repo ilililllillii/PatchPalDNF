@@ -32,12 +32,14 @@ namespace PatchPalDNF.ViewModel
         public static string DnfBackupFilePath;
 
 
-        //打开新窗体命令
+        //打开创建窗口命令
         public ICommand OpenWindowCommand { get; set; }
         //检索命令
         public ICommand SearchCommand { get; set; }
-
+        //启用禁用命令
         public ICommand NpkStatusClickCommand { get; set; }
+        //打开详情窗体命令
+        public ICommand PatchShowCommand { get; set; }
 
         // 将窗口声明为类级别成员变量
         private AddNewPatchBrief newWindow;
@@ -61,7 +63,9 @@ namespace PatchPalDNF.ViewModel
             }
         }
 
-
+        /// <summary>
+        /// 搜索框
+        /// </summary>
         public string QueryText { get; set; }
 
         public ICollectionView PatchBriefsView
@@ -76,7 +80,33 @@ namespace PatchPalDNF.ViewModel
             OpenWindowCommand = new RelayCommand(OpenWindow);
             SearchCommand = new RelayCommand(Search);
             NpkStatusClickCommand = new RelayCommand(NpkStatusClick);
+            PatchShowCommand = new RelayCommand(PatchShowClick);
             PatchBriefs = new ObservableCollection<PatchModel>(dataServer.LoadPatches());
+        }
+
+        /// <summary>
+        /// 查看补丁信息
+        /// </summary>
+        /// <param name="parameter"></param>
+        private void PatchShowClick(object parameter)
+        {
+            // 如果窗口未打开或已关闭，重新创建窗口
+            if (newWindow == null || !newWindow.IsLoaded)
+            {
+                newWindow = new AddNewPatchBrief();
+                newWindow.DataContext = new AddNewPatchBriefViewModel(newWindow, PatchBriefs, parameter as PatchModel);
+                newWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+                // 设置窗口关闭时清理 newWindow 引用
+                newWindow.Closed += (sender, e) => newWindow = null;
+
+                newWindow.ShowDialog();
+            }
+            else
+            {
+                // 如果窗口已经打开，激活它
+                newWindow.Activate();
+            }
         }
 
         /// <summary>
@@ -87,6 +117,7 @@ namespace PatchPalDNF.ViewModel
         {
             var patch = parameter as PatchModel;
             var fileName = patch.NpkLocalURL.Select(x => System.IO.Path.GetFileName(x)).ToList();
+            var localDataSource = dataServer.LoadPatches();
             if (patch.NpkStatus)
             {
                 dataServer.EnableNPK(fileName); 
@@ -95,6 +126,8 @@ namespace PatchPalDNF.ViewModel
             {
                 dataServer.DisableNPK(fileName);
             }
+            ///数据重新写入
+            dataServer.SavePatches(new List<PatchModel>(_patchBriefs));
         }
 
         // 检索功能
@@ -113,7 +146,7 @@ namespace PatchPalDNF.ViewModel
         }
 
         /// <summary>
-        /// 打开新的窗口
+        /// 打开创建窗口
         /// </summary>
         /// <param name="parameter"></param>
         private void OpenWindow(object parameter)

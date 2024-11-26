@@ -3,36 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:PatchPalDNF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="200"
              x:Name="PatchBriefControl">
-    <Border BorderThickness="1" BorderBrush="Gray" CornerRadius="5" Padding="10" Background="White">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2.5*"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+    <Button Command="{Binding PatchCommand, ElementName=PatchBriefControl}" CommandParameter="{Binding}">
+        <Button.Template>
+            <ControlTemplate TargetType="Button">
+                <Border BorderThickness="1" BorderBrush="Gray" CornerRadius="5" Padding="10" Background="White" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2.5*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
 
-            <!-- 补丁名称 -->
-            <TextBlock Grid.Row="0" Grid.Column="0" FontSize="14" FontWeight="Bold" Text="{Binding NpkName}" VerticalAlignment="Center" />
+                        <!-- 补丁名称 -->
+                        <TextBlock Grid.Row="0" Grid.Column="0" FontSize="14" FontWeight="Bold" Text="{Binding NpkName}" VerticalAlignment="Center" />
 
-            <!-- 按钮 -->
-            <CheckBox Grid.Row="0" Grid.Column="2" IsChecked="{Binding NpkStatus}" 
-                      Command="{Binding Command, ElementName=PatchBriefControl}"
-                      CommandParameter="{Binding}"/>
+                        <!-- 启用/禁用 -->
+                        <CheckBox Grid.Row="0" Grid.Column="2" IsChecked="{Binding NpkStatus}" 
+                                  Command="{Binding Command, ElementName=PatchBriefControl}"
+                                  CommandParameter="{Binding}"/>
 
-            <!-- 图片 -->
-            <Image Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Width="150" Height="150" Margin="5"
-                   Source="{Binding NpkImage}" Stretch="UniformToFill" />
+                        <!-- 图片 -->
+                        <Image Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Width="150" Height="150" Margin="5"
+                               Source="{Binding NpkImage}" Stretch="UniformToFill"/>
 
-            <!-- 描述 -->
-            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding NpkDescribe}"
-                       TextWrapping="Wrap" Margin="5,0,0,0" VerticalAlignment="Bottom" />
-        </Grid>
-    </Border>
+                        <!-- 描述 -->
+                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding NpkDescribe}"
+                                   TextWrapping="Wrap" Margin="5,0,0,0" VerticalAlignment="Bottom" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Button.Template>
+    </Button>
+    
 </UserControl>

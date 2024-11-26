@@ -82,11 +82,14 @@ namespace PatchPalDNF.ViewModel
         // 命令处理 Drop 事件
         public ICommand DropCommand { get; }
 
-        public AddNewPatchBriefViewModel(AddNewPatchBrief addNewPatchBrief, ObservableCollection<PatchModel> patchModels)
+        public AddNewPatchBriefViewModel(AddNewPatchBrief addNewPatchBrief, ObservableCollection<PatchModel> patchModels, PatchModel patchModel = null)
         {
             _addNewPatchBrief = addNewPatchBrief;
             _patchBriefs = patchModels;
-
+            if (patchModel != null)
+            {
+                PatchModel = patchModel;
+            }
             CancelCommand = new RelayCommand(IsCancel);
             SureCommand = new RelayCommand(IsSure);
             DropCommand = new RelayCommand(OnDrop);

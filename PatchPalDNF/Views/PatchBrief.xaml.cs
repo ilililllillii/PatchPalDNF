@@ -35,6 +35,20 @@ namespace PatchPalDNF.Views
             get { return (ICommand)GetValue(CommandProperty); }
             set { SetValue(CommandProperty, value); }
         }
+
+        public static readonly DependencyProperty PatchCommandProperty =
+            DependencyProperty.Register(
+                "PatchCommand",
+                typeof(ICommand),
+                typeof(PatchBrief),
+                new PropertyMetadata(null)
+            );
+
+        public ICommand PatchCommand
+        {
+            get { return (ICommand)GetValue(PatchCommandProperty); }
+            set { SetValue(PatchCommandProperty, value); }
+        }
         public PatchBrief()
         {
             InitializeComponent();

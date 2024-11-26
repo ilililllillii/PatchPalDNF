@@ -110,7 +110,7 @@
               RenderTransformOrigin="0.5, 1"
               BorderBrush="{TemplateBinding BorderBrush}"
               BorderThickness="{TemplateBinding BorderThickness}"
-             TextBlock.Foreground="{TemplateBinding Foreground}"
+              TextBlock.Foreground="{TemplateBinding Foreground}"
               CornerRadius="3"
               ClipToBounds="True">
             <ContentPresenter x:Name="content"

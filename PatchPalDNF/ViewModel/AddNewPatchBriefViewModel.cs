@@ -24,6 +24,7 @@ namespace PatchPalDNF.ViewModel
 
         private PatchModel PatchModel = new PatchModel();
 
+        private bool isUpDataPatchBrief = false;
         /// <summary>
         /// 名称
         /// </summary>
@@ -73,6 +74,32 @@ namespace PatchPalDNF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 本地路径
+        /// </summary>
+        public List<string> NpkLocalURL
+        {
+            get => PatchModel.NpkLocalURL;
+            set
+            {
+                PatchModel.NpkLocalURL = value;
+                OnPropertyChanged(nameof(NpkLocalURL));
+            }
+        }
+
+        /// <summary>
+        /// 本地路径
+        /// </summary>
+        public bool NpkStatus
+        {
+            get => PatchModel.NpkStatus;
+            set
+            {
+                PatchModel.NpkStatus = value;
+                OnPropertyChanged(nameof(NpkStatus));
+            }
+        }
+
         // 取消命令
         public ICommand CancelCommand { get; }
 
@@ -89,6 +116,11 @@ namespace PatchPalDNF.ViewModel
             if (patchModel != null)
             {
                 PatchModel = patchModel;
+                isUpDataPatchBrief = true;
+            }
+            else
+            {
+                isUpDataPatchBrief = false;
             }
             CancelCommand = new RelayCommand(IsCancel);
             SureCommand = new RelayCommand(IsSure);
@@ -110,8 +142,53 @@ namespace PatchPalDNF.ViewModel
         /// </summary>
         private void IsSure(object parameter)
         {
-            if (string.IsNullOrWhiteSpace(MainViewModel.DnfFilePath)) return;
+            if (string.IsNullOrWhiteSpace(MainViewModel.DnfFilePath))
+            {
+                MessageBox.Show($"你没装DNF你搞什么补丁？");
+                return;
+            }
+            if (isUpDataPatchBrief)
+            {
+                UpData();
+            }
+            else
+            {
+                AddData();
+            }
+        }
 
+        /// <summary>
+        /// 编辑数据
+        /// </summary>
+
+        private void UpData()
+        {
+            //foreach (var file in NpkLocalURL)
+            //{
+            //    try
+            //    {
+            //        string fileName = Path.GetFileName(file);
+            //        string targetPath = Path.Combine(MainViewModel.DnfFilePath, fileName);
+            //        System.IO.File.Copy(file, targetPath, true);
+            //        //复制备用文件
+            //        System.IO.File.Copy(file, Path.Combine(MainViewModel.DnfBackupFilePath, fileName), true);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show($"文件复制失败: {ex.Message}");
+            //    }
+            //}
+            //保存数据
+            new DataServer().SavePatches(new List<PatchModel>(_patchBriefs));
+
+            _addNewPatchBrief.Close();
+        }
+
+        /// <summary>
+        /// 新增数据
+        /// </summary>
+        private void AddData()
+        {
             foreach (var file in List)
             {
                 try
@@ -136,7 +213,7 @@ namespace PatchPalDNF.ViewModel
                 NpkDescribe = PatchModel.NpkDescribe,
                 NpkImage = PatchModel.NpkImage,
                 NpkLocalURL = List,
-                NpkStatus = true
+                NpkStatus = NpkStatus
             });
 
             //保存数据

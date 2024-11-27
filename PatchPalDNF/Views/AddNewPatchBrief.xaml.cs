@@ -55,7 +55,7 @@ namespace PatchPalDNF.Views
             }
 
             //处理界面
-            fileUINameList?.ForEach(name => { stackPanel.Children.Add(new Button { Content = name }); });
+            //fileUINameList?.ForEach(name => { stackPanel.Children.Add(new Button { Content = name }); });
 
             //数据传给vm
             var viewModel = (AddNewPatchBriefViewModel)this.DataContext;

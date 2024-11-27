@@ -107,6 +107,16 @@ namespace PatchPalDNF.ViewModel
                 // 如果窗口已经打开，激活它
                 newWindow.Activate();
             }
+            //更新界面
+            _patchBriefsView.Filter = obj =>
+            {
+                var patch = obj as PatchModel;
+                if (QueryText == null)
+                {
+                    QueryText = "";
+                }
+                return patch != null && patch.NpkName.Contains(QueryText);
+            };
         }
 
         /// <summary>

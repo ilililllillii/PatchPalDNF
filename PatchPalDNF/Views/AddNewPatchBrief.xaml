@@ -21,6 +21,12 @@
             <TextBlock Text="补丁名称" Margin="10"></TextBlock>
             <TextBox Text="{Binding NpkName}" Margin="10"/>
 
+            <!-- 源连接 -->
+            <TextBlock Text="源连接" Margin="10"></TextBlock>
+            <TextBox Text="{Binding NpkUrl}" Margin="10"/>
+
+            <CheckBox Grid.Row="0" Grid.Column="2" Content="是否立即使用" IsChecked="{Binding NpkStatus}" />
+
             <!-- 描述 -->
             <TextBlock  Text="补丁描述" Margin="10"/>
             <TextBox  Text="{Binding NpkDescribe}" Margin="10"/>
@@ -64,8 +70,11 @@
                 </TextBlock>
                 
             </Grid>
+           
             <ScrollViewer  VerticalScrollBarVisibility="Auto">
-                <StackPanel x:Name="stackPanel" Margin="5" />
+                <StackPanel x:Name="stackPanel" Margin="5">
+                    <ItemsControl ItemsSource="{Binding NpkLocalURL}"/>
+                </StackPanel>
             </ScrollViewer>
             
         </StackPanel>

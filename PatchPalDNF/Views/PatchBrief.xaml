@@ -1,17 +1,16 @@
 ﻿<UserControl x:Class="PatchPalDNF.Views.PatchBrief"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:local="clr-namespace:PatchPalDNF.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="200"
-             x:Name="PatchBriefControl">
-    <Button Command="{Binding PatchCommand, ElementName=PatchBriefControl}" CommandParameter="{Binding}">
+             x:Name="PatchBriefControl"
+             >
+    <Button Style="{StaticResource WithoutButtonStyle}" Command="{Binding PatchCommand, ElementName=PatchBriefControl}" CommandParameter="{Binding}">
         <Button.Template>
             <ControlTemplate TargetType="Button">
-                <Border BorderThickness="1" BorderBrush="Gray" CornerRadius="5" Padding="10" Background="White" >
+                <Border BorderThickness="1" BorderBrush="Gray" CornerRadius="5" Padding="5" Background="#1A181A" >
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -26,21 +25,23 @@
                         <TextBlock Grid.Row="0" Grid.Column="0" FontSize="14" FontWeight="Bold" Text="{Binding NpkName}" VerticalAlignment="Center" />
 
                         <!-- 启用/禁用 -->
-                        <CheckBox Grid.Row="0" Grid.Column="2" IsChecked="{Binding NpkStatus}" 
+                        <CheckBox x:Name="sliderCherkBox" Style="{DynamicResource SliderCheckBox}" 
+                                  Content="{Binding ElementName=Checker1,Path=IsChecked}" 
+                                  Grid.Row="0" Grid.Column="2" IsChecked="{Binding NpkStatus}" 
                                   Command="{Binding Command, ElementName=PatchBriefControl}"
-                                  CommandParameter="{Binding}"/>
+                                  CommandParameter="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
                         <!-- 图片 -->
                         <Image Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Width="150" Height="150" Margin="5"
                                Source="{Binding NpkImage}" Stretch="UniformToFill"/>
 
                         <!-- 描述 -->
-                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding NpkDescribe}"
-                                   TextWrapping="Wrap" Margin="5,0,0,0" VerticalAlignment="Bottom" />
+                        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" MinHeight="20" MaxHeight="60" VerticalAlignment="Bottom" Background="#1A181A" Opacity="0.9">
+                            <TextBlock Text="{Binding NpkDescribe}" TextWrapping="Wrap" />
+                        </Border>
                     </Grid>
                 </Border>
             </ControlTemplate>
         </Button.Template>
     </Button>
-    
 </UserControl>

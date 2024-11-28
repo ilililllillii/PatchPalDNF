@@ -23,6 +23,8 @@ namespace PatchPalDNF.ViewModel
         private ObservableCollection<PatchModel> _patchBriefs;
 
         private PatchModel PatchModel = new PatchModel();
+        // 数据操作类
+        private DataServer dataServer;
 
         private bool isUpDataPatchBrief = false;
         /// <summary>
@@ -111,6 +113,7 @@ namespace PatchPalDNF.ViewModel
 
         public AddNewPatchBriefViewModel(AddNewPatchBrief addNewPatchBrief, ObservableCollection<PatchModel> patchModels, PatchModel patchModel = null)
         {
+            dataServer = new DataServer();
             _addNewPatchBrief = addNewPatchBrief;
             _patchBriefs = patchModels;
             if (patchModel != null)
@@ -163,21 +166,16 @@ namespace PatchPalDNF.ViewModel
 
         private void UpData()
         {
-            //foreach (var file in NpkLocalURL)
-            //{
-            //    try
-            //    {
-            //        string fileName = Path.GetFileName(file);
-            //        string targetPath = Path.Combine(MainViewModel.DnfFilePath, fileName);
-            //        System.IO.File.Copy(file, targetPath, true);
-            //        //复制备用文件
-            //        System.IO.File.Copy(file, Path.Combine(MainViewModel.DnfBackupFilePath, fileName), true);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show($"文件复制失败: {ex.Message}");
-            //    }
-            //}
+            var fileName = NpkLocalURL.Select(x => System.IO.Path.GetFileName(x)).ToList();
+            var localDataSource = dataServer.LoadPatches();
+            if (NpkStatus)
+            {
+                dataServer.EnableNPK(fileName);
+            }
+            else
+            {
+                dataServer.DisableNPK(fileName);
+            }
             //保存数据
             new DataServer().SavePatches(new List<PatchModel>(_patchBriefs));
 
@@ -189,7 +187,7 @@ namespace PatchPalDNF.ViewModel
         /// </summary>
         private void AddData()
         {
-            foreach (var file in List)
+            foreach (var file in NpkLocalURL)
             {
                 try
                 {
@@ -204,6 +202,8 @@ namespace PatchPalDNF.ViewModel
                     MessageBox.Show($"文件复制失败: {ex.Message}");
                 }
             }
+            //复制完成后，将拖拽时候的本地路径，换错备份路径进行保存
+            NpkLocalURL = NpkLocalURL.Select(x => x = Path.Combine(MainViewModel.DnfBackupFilePath, Path.GetFileName(x))).ToList();
 
             //生成卡片逻辑
             _patchBriefs.Add(new PatchModel
@@ -212,7 +212,7 @@ namespace PatchPalDNF.ViewModel
                 NpkUrl = PatchModel.NpkUrl,
                 NpkDescribe = PatchModel.NpkDescribe,
                 NpkImage = PatchModel.NpkImage,
-                NpkLocalURL = List,
+                NpkLocalURL = NpkLocalURL,
                 NpkStatus = NpkStatus
             });
 
@@ -221,8 +221,6 @@ namespace PatchPalDNF.ViewModel
 
             _addNewPatchBrief.Close();
         }
-
-        List<string> List = new List<string>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -234,7 +232,7 @@ namespace PatchPalDNF.ViewModel
         // Drop 事件的处理方法
         private void OnDrop(object parameter)
         {
-            List = (List<string>)parameter;
+            NpkLocalURL = (List<string>)parameter;
         }
     }
 }

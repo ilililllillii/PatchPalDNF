@@ -26,6 +26,13 @@ namespace PatchPalDNF.Views
             InitializeComponent();
         }
 
+        private void DragMoveWindow(object sender, System.Windows.Input.MouseButtonEventArgs e)
+           => DragMove();
+
+        private void CloseSettingsWindow(object sender, RoutedEventArgs e)
+            => Close();
+
+
         private void Grid_Drop(object sender, DragEventArgs e)
         {
             // 获取拖拽的文件路径

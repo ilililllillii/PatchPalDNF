@@ -123,7 +123,8 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <local:PatchBrief Command="{Binding DataContext.NpkStatusClickCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                                  PatchCommand="{Binding DataContext.PatchShowCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                                  PatchCommand="{Binding DataContext.PatchShowCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                  BorderBrush="Red"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                         <!-- 此处设置面板，使得布局为方块。写在外面有问题 -->

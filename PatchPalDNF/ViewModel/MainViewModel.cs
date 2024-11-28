@@ -111,11 +111,7 @@ namespace PatchPalDNF.ViewModel
             _patchBriefsView.Filter = obj =>
             {
                 var patch = obj as PatchModel;
-                if (QueryText == null)
-                {
-                    QueryText = "";
-                }
-                return patch != null && patch.NpkName.Contains(QueryText);
+                return  patch.NpkName.Contains("");
             };
         }
 

@@ -111,6 +111,9 @@ namespace PatchPalDNF.ViewModel
         // 命令处理 Drop 事件
         public ICommand DropCommand { get; }
 
+        // 删npklist集合
+        public ICommand DelNpkListCommand { get; }
+
         public AddNewPatchBriefViewModel(AddNewPatchBrief addNewPatchBrief, ObservableCollection<PatchModel> patchModels, PatchModel patchModel = null)
         {
             dataServer = new DataServer();
@@ -128,6 +131,7 @@ namespace PatchPalDNF.ViewModel
             CancelCommand = new RelayCommand(IsCancel);
             SureCommand = new RelayCommand(IsSure);
             DropCommand = new RelayCommand(OnDrop);
+            DelNpkListCommand = new RelayCommand(DelNpkList);
         }
 
         /// <summary>
@@ -220,6 +224,11 @@ namespace PatchPalDNF.ViewModel
             new DataServer().SavePatches(new List<PatchModel>(_patchBriefs));
 
             _addNewPatchBrief.Close();
+        }
+
+        private void DelNpkList(object parameter)
+        {
+            NpkLocalURL.Remove((string)parameter); 
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

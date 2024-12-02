@@ -10,7 +10,7 @@
     <Button Style="{StaticResource WithoutButtonStyle}" Command="{Binding PatchCommand, ElementName=PatchBriefControl}" CommandParameter="{Binding}">
         <Button.Template>
             <ControlTemplate TargetType="Button">
-                <Border BorderThickness="1" BorderBrush="Gray" CornerRadius="5" Padding="5" Background="#1A181A" >
+                <Border BorderThickness="1" BorderBrush="#F7BA38" CornerRadius="5" Padding="5" Background="#1A181A" >
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -26,7 +26,8 @@
 
                         <!-- 启用/禁用 -->
                         <CheckBox x:Name="sliderCherkBox" Style="{DynamicResource SliderCheckBox}" 
-                                  Content="{Binding ElementName=Checker1,Path=IsChecked}" 
+                                  Content="{Binding ElementName=sliderCherkBox,Path=IsChecked,Converter={StaticResource CheckBoxConverter}}" 
+                                  Foreground="#F7BA38"
                                   Grid.Row="0" Grid.Column="2" IsChecked="{Binding NpkStatus}" 
                                   Command="{Binding Command, ElementName=PatchBriefControl}"
                                   CommandParameter="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Center"/>

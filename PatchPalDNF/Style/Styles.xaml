@@ -4,5 +4,6 @@
         <ResourceDictionary Source="Button.xaml" />
         <ResourceDictionary Source="RoundedTextBox.xaml" />
         <ResourceDictionary Source="SliderCheckBox.xaml" />
+        <ResourceDictionary Source="TabControl.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

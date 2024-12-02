@@ -5,9 +5,6 @@
              xmlns:converter ="clr-namespace:PatchPalDNF.Converters"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        
-        
-
         <ResourceDictionary>
             <!-- 资源字典 -->
             <ResourceDictionary.MergedDictionaries>
@@ -15,6 +12,7 @@
             </ResourceDictionary.MergedDictionaries>
             <!-- 值转换器 -->
             <converter:FileNameConverter x:Key="FileNameConverter"/>
+            <converter:CheckBoxConverter x:Key="CheckBoxConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

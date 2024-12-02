@@ -10,18 +10,14 @@
         WindowStartupLocation="CenterScreen"
         Background="#FF292622"
         Height="600" Width="1100">
+    <Window.Resources>
+        
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <!-- 主布局 -->
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <!-- 左侧导航栏 -->
-            <ColumnDefinition Width="*"/>
-            <!-- 主内容区域 -->
-        </Grid.ColumnDefinitions>
 
         <!-- 标题栏 -->
         <Grid Grid.Row="0" Grid.ColumnSpan="2" Height="35">
@@ -69,74 +65,79 @@
             </Button>
         </Grid>
 
-        <!-- 左侧导航栏 -->
-        <Border Grid.Row="1" Grid.Column="0">
-            <StackPanel Margin="10">
-                <Button Content="补丁" Style="{StaticResource NormalButtonStyle}" />
-                <Button Content="设置" Style="{StaticResource WithoutButtonStyle}"/>
-                <Button Content="关于" />
-            </StackPanel>
+        <Border Grid.Row="1" Margin="5">
+            <TabControl  Style="{DynamicResource TabControlStyle1}">
+                <TabItem Style="{DynamicResource TabItemStyle1}" Header="画面" Width="100" Height="30">
+                    <Grid Margin="10" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <!-- 搜索栏 -->
+                        <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Border CornerRadius="20" Background="#000100" Padding="5" Margin="10,0">
+                                <Grid>
+                                    <!-- 输入框 -->
+                                    <TextBox Background="#000100"
+                                             Foreground="#D5C691"  
+                                             BorderThickness="0"
+                                             FontSize="14"
+                                             VerticalContentAlignment="Center"
+                                             FontWeight="Bold"
+                                             Text="{Binding QueryText}"
+                                             Margin="10,0,40,0"/>
+                                    <!-- 搜索按钮 -->
+                                    <Button Style="{StaticResource WithoutButtonStyle}"
+                                            Width="25"
+                                            Height="25"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"
+                                            BorderThickness="0"
+                                            Margin="0,0,5,0"
+                                            Cursor="Hand"
+                                            Command="{Binding SearchCommand}" >
+                                        <Button.Background>
+                                            <ImageBrush ImageSource="pack://application:,,,/Image/Search.png"/>
+                                        </Button.Background>
+                                    </Button>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+
+                        <!-- 补丁卡片展示 -->
+                        <Grid Grid.Row="1" Margin="10,20,10,10">
+                            <ScrollViewer  VerticalScrollBarVisibility="Auto">
+                                <ItemsControl ItemsSource="{Binding PatchBriefsView}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <local:PatchBrief Command="{Binding DataContext.NpkStatusClickCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                           PatchCommand="{Binding DataContext.PatchShowCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                           Padding="5"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <!-- 此处设置面板，使得布局为方块。写在外面有问题 -->
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </ScrollViewer>
+                            <Button Style="{StaticResource WithoutButtonStyle}" Content="+" Width="50" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20" Command="{Binding OpenWindowCommand}"  ></Button>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Style="{DynamicResource TabItemStyle1}" FontSize="19" Header="设置"  Width="100" Height="30">
+                    <TextBlock Text="还没想好放点啥"/>
+                </TabItem>
+                <TabItem Style="{DynamicResource TabItemStyle1}" FontSize="19" Header="关于"  Width="100" Height="30">
+                    <TextBlock Text="同样没想好放点啥"/>
+                </TabItem>
+            </TabControl>
         </Border>
 
         <!-- 主内容区域 -->
-        <Grid Grid.Row="1" Grid.Column="1" Margin="10" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <!-- 搜索栏 -->
-            <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Border CornerRadius="20" Background="#000100" Padding="5" Margin="10,0">
-                    <Grid>
-                        <!-- 输入框 -->
-                        <TextBox Background="#000100"
-                                 Foreground="#D5C691"  
-                                 BorderThickness="0"
-                                 FontSize="14"
-                                 VerticalContentAlignment="Center"
-                                 FontWeight="Bold"
-                                 Text="{Binding QueryText}"
-                                 Margin="10,0,40,0"/>
-                        <!-- 搜索按钮 -->
-                        <Button Style="{StaticResource WithoutButtonStyle}"
-                                Width="25"
-                                Height="25"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                BorderThickness="0"
-                                Margin="0,0,5,0"
-                                Cursor="Hand"
-                                Command="{Binding SearchCommand}" >
-                            <Button.Background>
-                                <ImageBrush ImageSource="pack://application:,,,/Image/Search.png"/>
-                            </Button.Background>
-                        </Button>
-                    </Grid>
-                </Border>
-            </StackPanel>
-
-            <!-- 补丁卡片展示 -->
-            <Grid Grid.Row="1" Margin="10,20,10,10">
-                <ScrollViewer  VerticalScrollBarVisibility="Auto">
-                    <ItemsControl ItemsSource="{Binding PatchBriefsView}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <local:PatchBrief Command="{Binding DataContext.NpkStatusClickCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                                  PatchCommand="{Binding DataContext.PatchShowCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                                  BorderBrush="Red"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                        <!-- 此处设置面板，使得布局为方块。写在外面有问题 -->
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </ScrollViewer>
-                <Button Content="+" Width="50" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20" Command="{Binding OpenWindowCommand}"  ></Button>
-            </Grid>
-        </Grid>
+       
     </Grid>
 </Window>

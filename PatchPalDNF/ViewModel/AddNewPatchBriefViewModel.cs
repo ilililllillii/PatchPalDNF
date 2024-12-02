@@ -23,6 +23,8 @@ namespace PatchPalDNF.ViewModel
         private ObservableCollection<PatchModel> _patchBriefs;
 
         private PatchModel PatchModel = new PatchModel();
+        //深拷贝进入输入时的数据载体
+        private PatchModel CopyPatchModel = new PatchModel();
         // 数据操作类
         private DataServer dataServer;
 
@@ -90,7 +92,7 @@ namespace PatchPalDNF.ViewModel
         }
 
         /// <summary>
-        /// 本地路径
+        /// 状态
         /// </summary>
         public bool NpkStatus
         {
@@ -123,6 +125,15 @@ namespace PatchPalDNF.ViewModel
             {
                 PatchModel = patchModel;
                 isUpDataPatchBrief = true;
+                CopyPatchModel = new PatchModel //进行深复制
+                {
+                    NpkName = patchModel.NpkName,
+                    NpkDescribe = patchModel.NpkDescribe,
+                    NpkImage = patchModel.NpkImage,
+                    NpkLocalURL = patchModel.NpkLocalURL,
+                    NpkStatus   = patchModel.NpkStatus,
+                    NpkUrl  = patchModel.NpkUrl,
+                };
             }
             else
             {
@@ -139,6 +150,13 @@ namespace PatchPalDNF.ViewModel
         /// </summary>
         private void IsCancel(object parameter)
         {
+            //界面点击取消时将深拷贝的数据覆盖修改的数据
+            NpkName = CopyPatchModel.NpkName;
+            NpkDescribe = CopyPatchModel.NpkDescribe;
+            NpkImage = CopyPatchModel.NpkImage;
+            NpkLocalURL = CopyPatchModel.NpkLocalURL;
+            NpkStatus = CopyPatchModel.NpkStatus;
+            NpkUrl = CopyPatchModel.NpkUrl;
             // 关闭当前窗口
             _addNewPatchBrief.Close();
         }
@@ -172,6 +190,10 @@ namespace PatchPalDNF.ViewModel
         {
             var fileName = NpkLocalURL.Select(x => System.IO.Path.GetFileName(x)).ToList();
             var localDataSource = dataServer.LoadPatches();
+            if (NpkLocalURL?.Count <= 0)
+            {
+                MessageBox.Show("无NPK补丁文件，无法创建补丁管理！");
+            }
             if (NpkStatus)
             {
                 dataServer.EnableNPK(fileName);
@@ -228,7 +250,7 @@ namespace PatchPalDNF.ViewModel
 
         private void DelNpkList(object parameter)
         {
-            NpkLocalURL.Remove((string)parameter); 
+            NpkLocalURL = NpkLocalURL.Where(x => x != (string)parameter).ToList(); 
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -9,7 +9,7 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Background="#FF292622"
-        Height="600" Width="1100">
+        Height="600" Width="970">
     <Window.Resources>
         
     </Window.Resources>
@@ -107,13 +107,13 @@
 
                         <!-- 补丁卡片展示 -->
                         <Grid Grid.Row="1" Margin="10,20,10,10">
-                            <ScrollViewer  VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer  VerticalScrollBarVisibility="Auto" Padding="-9">
                                 <ItemsControl ItemsSource="{Binding PatchBriefsView}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <local:PatchBrief Command="{Binding DataContext.NpkStatusClickCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                           PatchCommand="{Binding DataContext.PatchShowCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                           Padding="5"/>
+                                                              PatchCommand="{Binding DataContext.PatchShowCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                              Padding="5"/>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                     <!-- 此处设置面板，使得布局为方块。写在外面有问题 -->

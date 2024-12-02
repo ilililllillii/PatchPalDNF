@@ -99,7 +99,6 @@ namespace PatchPalDNF.ViewModel
 
                 // 设置窗口关闭时清理 newWindow 引用
                 newWindow.Closed += (sender, e) => newWindow = null;
-
                 newWindow.ShowDialog();
             }
             else
@@ -111,7 +110,7 @@ namespace PatchPalDNF.ViewModel
             _patchBriefsView.Filter = obj =>
             {
                 var patch = obj as PatchModel;
-                return  patch.NpkName.Contains("");
+                return patch.NpkName.Contains("");
             };
         }
 

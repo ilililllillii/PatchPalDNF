@@ -10,9 +10,6 @@
         WindowStartupLocation="CenterScreen"
         Background="#FF292622"
         Height="600" Width="970">
-    <Window.Resources>
-        
-    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

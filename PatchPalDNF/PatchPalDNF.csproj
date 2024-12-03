@@ -154,5 +154,10 @@
   <ItemGroup>
     <Resource Include="Image\Close.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\basic.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

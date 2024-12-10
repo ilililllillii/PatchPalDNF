@@ -38,7 +38,7 @@
                         <!-- 启用/禁用 -->
                         <CheckBox x:Name="sliderCherkBox"
                                   Style="{DynamicResource SliderCheckBox}"
-                                  Content="{Binding ElementName=sliderCherkBox,Path=IsChecked,Converter={StaticResource CheckBoxConverter}}"
+                                  
                                   Foreground="#F7BA38"
                                   Grid.Row="0"
                                   Grid.Column="2"

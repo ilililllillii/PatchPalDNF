@@ -4,151 +4,206 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PatchPalDNF.Converters"
-        mc:Ignorable="d" Height="500" Width="500" 
-        WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
-        Background="#070707" >
+        mc:Ignorable="d"
+        Height="500"
+        Width="500"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#070707">
     <Window.Resources>
-        <local:FileNameConverter x:Key="FileNameConverter"/>
+        <local:FileNameConverter x:Key="FileNameConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!-- 标题栏 -->
-        <Grid Grid.Row="0" Height="25">
-            <Border BorderThickness="2" 
-            MouseLeftButtonDown="DragMoveWindow">
+        <Grid Grid.Row="0"
+              Height="25">
+            <Border BorderThickness="2"
+                    MouseLeftButtonDown="DragMoveWindow">
                 <Border.BorderBrush>
                     <RadialGradientBrush RadiusX=".65"
-                                 RadiusY="1.2"
-                                 Center=".5, -.1"
-                                 GradientOrigin=".5, -.1">
-                        <GradientStop Offset="0" Color="#FF5883C9" />
-                        <GradientStop Offset="1" Color="#FF0B2034" />
+                                         RadiusY="1.2"
+                                         Center=".5, -.1"
+                                         GradientOrigin=".5, -.1">
+                        <GradientStop Offset="0"
+                                      Color="#FF5883C9" />
+                        <GradientStop Offset="1"
+                                      Color="#FF0B2034" />
                     </RadialGradientBrush>
                 </Border.BorderBrush>
                 <Border.Background>
-                    <RadialGradientBrush RadiusX="1" RadiusY="1.2" Center=".5, -.1" GradientOrigin=".5, -.1">
-                        <GradientStop Offset="0" Color="#FF2C5597" />
-                        <GradientStop Offset="1" Color="#FF020E1B" />
+                    <RadialGradientBrush RadiusX="1"
+                                         RadiusY="1.2"
+                                         Center=".5, -.1"
+                                         GradientOrigin=".5, -.1">
+                        <GradientStop Offset="0"
+                                      Color="#FF2C5597" />
+                        <GradientStop Offset="1"
+                                      Color="#FF020E1B" />
                     </RadialGradientBrush>
                 </Border.Background>
                 <Border.Effect>
-                    <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="Black" />
+                    <DropShadowEffect BlurRadius="5"
+                                      ShadowDepth="0"
+                                      Color="Black" />
                 </Border.Effect>
             </Border>
             <TextBlock Text="补丁信息"
-               FontFamily="../Assets/#GasinamuNew"
-               FontSize="20"
-               FontWeight="Bold"
-               TextAlignment="Center"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               Foreground="#FF9F854A" />
+                       FontFamily="../Assets/#GasinamuNew"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       TextAlignment="Center"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="#FF9F854A" />
             <Button HorizontalAlignment="Right"
                     Style="{StaticResource WithoutButtonStyle}"
                     BorderThickness="0"
                     Padding="0"
                     Click="CloseSettingsWindow"
                     Margin="0, 0, 5, 0">
-                <Viewbox Width="25" Height="25">
-                    <Canvas Width="24" Height="24">
+                <Viewbox Width="25"
+                         Height="25">
+                    <Canvas Width="24"
+                            Height="24">
                         <Path Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}"
                               Data="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" />
                     </Canvas>
                 </Viewbox>
             </Button>
         </Grid>
-        <Grid Grid.Row="1" Opacity="0.8">
+        <Grid Grid.Row="1"
+              Opacity="0.8">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
-            <StackPanel Margin="5" Grid.Row="0">
+            <StackPanel Margin="5"
+                        Grid.Row="0">
                 <!-- 名称 -->
-                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Border CornerRadius="5" Background="#060705" Padding="5" >
+                <StackPanel HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                    <Border CornerRadius="5"
+                            Background="#060705"
+                            Padding="5">
                         <Grid>
-                            <TextBlock FontSize="14" Text="补丁名称" Foreground="#FF9F854A" Margin="5"></TextBlock>
+                            <TextBlock FontSize="14"
+                                       Text="补丁名称"
+                                       Foreground="#FF9F854A"
+                                       Margin="5"></TextBlock>
                             <!-- 输入框 -->
                             <TextBox Background="#000100"
-                                     Foreground="#D5C691"  
+                                     Foreground="#D5C691"
                                      BorderBrush="#FF9F854A"
                                      BorderThickness="1"
                                      FontSize="14"
                                      VerticalContentAlignment="Center"
                                      FontWeight="Bold"
                                      Text="{Binding NpkName}"
-                                     Margin="70,0,0,0"/>
+                                     Margin="70,0,0,0" />
                         </Grid>
                     </Border>
                 </StackPanel>
                 <!-- 源连接 -->
-                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Border CornerRadius="5" Background="#1A181A" Padding="5">
+                <StackPanel HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                    <Border CornerRadius="5"
+                            Background="#1A181A"
+                            Padding="5">
                         <Grid>
-                            <TextBlock Text="源连接" FontSize="14" Foreground="#FF9F854A" Margin="5"></TextBlock>
+                            <TextBlock Text="源连接"
+                                       FontSize="14"
+                                       Foreground="#FF9F854A"
+                                       Margin="5"></TextBlock>
                             <!-- 输入框 -->
                             <TextBox Background="#000100"
-                                     Foreground="#D5C691"  
+                                     Foreground="#D5C691"
                                      BorderBrush="#FF9F854A"
                                      BorderThickness="1"
                                      FontSize="14"
                                      VerticalContentAlignment="Center"
                                      FontWeight="Bold"
                                      Text="{Binding NpkUrl}"
-                                     Margin="70,0,0,0"/>
+                                     Margin="70,0,0,0" />
                         </Grid>
                     </Border>
                 </StackPanel>
                 <!-- 是否立即使用 -->
-                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Border CornerRadius="5" Background="#060705" Padding="5" >
+                <StackPanel HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                    <Border CornerRadius="5"
+                            Background="#060705"
+                            Padding="5">
                         <Grid>
-                            <TextBlock Text="是否立即使用" FontSize="14" Foreground="#FF9F854A" Margin="5"></TextBlock>
-                            <CheckBox 
-                                      IsChecked="{Binding NpkStatus}" 
-                                      HorizontalAlignment="Right" 
-                                      VerticalAlignment="Center"/>
+                            <TextBlock Text="是否立即使用"
+                                       FontSize="14"
+                                       Foreground="#FF9F854A"
+                                       Margin="5"></TextBlock>
+                            <CheckBox IsChecked="{Binding NpkStatus}"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Center" />
                         </Grid>
                     </Border>
                 </StackPanel>
                 <!-- 补丁描述 -->
-                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Border CornerRadius="5" Background="#1A181A" Padding="5" >
+                <StackPanel HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                    <Border CornerRadius="5"
+                            Background="#1A181A"
+                            Padding="5">
                         <Grid>
-                            <TextBlock Text="补丁描述" FontSize="14" Foreground="#FF9F854A" Margin="5"></TextBlock>
+                            <TextBlock Text="补丁描述"
+                                       FontSize="14"
+                                       Foreground="#FF9F854A"
+                                       Margin="5"></TextBlock>
                             <TextBox Background="#000100"
-                                     Foreground="#D5C691"  
+                                     Foreground="#D5C691"
                                      BorderBrush="#FF9F854A"
                                      BorderThickness="1"
                                      FontSize="14"
                                      VerticalContentAlignment="Center"
                                      FontWeight="Bold"
                                      Text="{Binding NpkDescribe}"
-                                     Margin="70,0,0,0"/>
+                                     Margin="70,0,0,0" />
                         </Grid>
                     </Border>
                 </StackPanel>
             </StackPanel>
-            
+
             <!-- 图片 -->
-            <Grid Grid.Row="0" Grid.Column="1" AllowDrop="True"  Drop="Image_Drop">
-                <Image x:Name="image" Width="150" Height="150" Source="{Binding NpkImage}" Stretch="UniformToFill"/>
+            <Grid Grid.Row="0"
+                  Grid.Column="1"
+                  AllowDrop="True"
+                  Drop="Image_Drop">
+                <Image x:Name="image"
+                       Width="150"
+                       Height="150"
+                       Source="{Binding NpkImage}"
+                       Stretch="UniformToFill" />
                 <!-- 提示文本 -->
-                <TextBlock Text="拖拽图片到此处" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="Gray">
+                <TextBlock Text="拖拽图片到此处"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="14"
+                           Foreground="Gray">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Setter Property="Visibility"
+                                    Value="Collapsed" />
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding NpkImage}" Value="{x:Null}">
-                                    <Setter Property="Visibility" Value="Visible" />
+                                <DataTrigger Binding="{Binding NpkImage}"
+                                             Value="{x:Null}">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -156,19 +211,34 @@
                 </TextBlock>
             </Grid>
 
-            <StackPanel Background="#1A181A" Grid.Row="1" Grid.ColumnSpan="2" Margin="5">
-                
+            <StackPanel Background="#1A181A"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Margin="5">
+
                 <!-- NPK文件列表 -->
-                <Grid Background="#060705" Margin="5" Height="80" AllowDrop="True"  Drop="Grid_Drop">
-                    <TextBlock Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Text="文件拖拽到此处" />
+                <Grid Background="#060705"
+                      Margin="5"
+                      Height="80"
+                      AllowDrop="True"
+                      Drop="Grid_Drop">
+                    <TextBlock Foreground="Gray"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="16"
+                               Text="文件拖拽到此处" />
                 </Grid>
-                
-                <ScrollViewer Background="#1A181A" Margin="5" VerticalScrollBarVisibility="Auto">
+
+                <ScrollViewer Background="#1A181A"
+                              Margin="5"
+                              VerticalScrollBarVisibility="Auto">
                     <ItemsControl ItemsSource="{Binding NpkLocalURL}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <Button x:Name="npkFileName" Style="{StaticResource WithoutButtonStyle}" Content="{Binding Path=., Converter={StaticResource FileNameConverter}}"/>
+                                    <Button x:Name="npkFileName"
+                                            Style="{StaticResource WithoutButtonStyle}"
+                                            Content="{Binding Path=., Converter={StaticResource FileNameConverter}}" />
                                     <Button HorizontalAlignment="Right"
                                             VerticalAlignment="Center"
                                             Style="{StaticResource WithoutButtonStyle}"
@@ -176,11 +246,11 @@
                                             Height="25"
                                             BorderThickness="0"
                                             Padding="0"
-                                            Command="{Binding DataContext.DelNpkListCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                            Command="{Binding DataContext.DelNpkListCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                             CommandParameter="{Binding}"
                                             Margin="0, 0, 5, 0">
                                         <Button.Background>
-                                            <ImageBrush ImageSource="pack://application:,,,/Image/Close.png"/>
+                                            <ImageBrush ImageSource="pack://application:,,,/Image/Close.png" />
                                         </Button.Background>
                                     </Button>
                                 </Grid>
@@ -190,9 +260,21 @@
                 </ScrollViewer>
 
             </StackPanel>
-            <WrapPanel  Grid.Row="2" Grid.ColumnSpan="2" Margin="5" HorizontalAlignment="Right">
-                <Button Width="60" Height="30" Command="{Binding CancelCommand}" Content="取消" Margin="10,0" Style="{StaticResource NormalButtonStyle}"/>
-                <Button Width="60" Height="30" Command="{Binding SureCommand}" Content="确定" Style="{StaticResource NormalButtonStyle}"/>
+            <WrapPanel  Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        Margin="5"
+                        HorizontalAlignment="Right">
+                <Button Width="60"
+                        Height="30"
+                        Command="{Binding CancelCommand}"
+                        Content="取消"
+                        Margin="10,0"
+                        Style="{StaticResource NormalButtonStyle}" />
+                <Button Width="60"
+                        Height="30"
+                        Command="{Binding SureCommand}"
+                        Content="确定"
+                        Style="{StaticResource NormalButtonStyle}" />
             </WrapPanel>
         </Grid>
     </Grid>

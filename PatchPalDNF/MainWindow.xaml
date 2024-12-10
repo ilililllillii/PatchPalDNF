@@ -9,34 +9,46 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Background="#FF292622"
-        Height="600" Width="970">
+        Height="600"
+        Width="970">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition/>
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <!-- 标题栏 -->
-        <Grid Grid.Row="0" Grid.ColumnSpan="2" Height="35">
-            <Border BorderThickness="2" 
+        <Grid Grid.Row="0"
+              Grid.ColumnSpan="2"
+              Height="35">
+            <Border BorderThickness="2"
                     MouseLeftButtonDown="DragMoveWindow">
                 <Border.BorderBrush>
                     <RadialGradientBrush RadiusX=".65"
                                          RadiusY="1.2"
                                          Center=".5, -.1"
                                          GradientOrigin=".5, -.1">
-                        <GradientStop Offset="0" Color="#FF5883C9" />
-                        <GradientStop Offset="1" Color="#FF0B2034" />
+                        <GradientStop Offset="0"
+                                      Color="#FF5883C9" />
+                        <GradientStop Offset="1"
+                                      Color="#FF0B2034" />
                     </RadialGradientBrush>
                 </Border.BorderBrush>
                 <Border.Background>
-                    <RadialGradientBrush RadiusX="1" RadiusY="1.2" Center=".5, -.1" GradientOrigin=".5, -.1">
-                        <GradientStop Offset="0" Color="#FF2C5597" />
-                        <GradientStop Offset="1" Color="#FF020E1B" />
+                    <RadialGradientBrush RadiusX="1"
+                                         RadiusY="1.2"
+                                         Center=".5, -.1"
+                                         GradientOrigin=".5, -.1">
+                        <GradientStop Offset="0"
+                                      Color="#FF2C5597" />
+                        <GradientStop Offset="1"
+                                      Color="#FF020E1B" />
                     </RadialGradientBrush>
                 </Border.Background>
                 <Border.Effect>
-                    <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="Black" />
+                    <DropShadowEffect BlurRadius="5"
+                                      ShadowDepth="0"
+                                      Color="Black" />
                 </Border.Effect>
             </Border>
             <TextBlock Text="补丁助手"
@@ -53,37 +65,48 @@
                     Padding="0"
                     Click="CloseSettingsWindow"
                     Margin="0, 0, 5, 0">
-                <Viewbox Width="25" Height="25">
-                    <Canvas Width="24" Height="24">
+                <Viewbox Width="25"
+                         Height="25">
+                    <Canvas Width="24"
+                            Height="24">
                         <Path Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=Foreground}"
-                            Data="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" />
+                              Data="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" />
                     </Canvas>
                 </Viewbox>
             </Button>
         </Grid>
 
-        <Border Grid.Row="1" Margin="5">
+        <Border Grid.Row="1"
+                Margin="5">
             <TabControl  Style="{DynamicResource TabControlStyle1}">
-                <TabItem Style="{DynamicResource TabItemStyle1}" Header="画面" Width="100" Height="30">
-                    <Grid Margin="10" >
+                <TabItem Style="{DynamicResource TabItemStyle1}"
+                         Header="补丁"
+                         Width="100"
+                         Height="30">
+                    <Grid Margin="10">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
 
                         <!-- 搜索栏 -->
-                        <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <Border CornerRadius="20" Background="#000100" Padding="5" Margin="10,0">
+                        <StackPanel Grid.Row="0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch">
+                            <Border CornerRadius="20"
+                                    Background="#000100"
+                                    Padding="5"
+                                    Margin="10,0">
                                 <Grid>
                                     <!-- 输入框 -->
                                     <TextBox Background="#000100"
-                                             Foreground="#D5C691"  
+                                             Foreground="#D5C691"
                                              BorderThickness="0"
                                              FontSize="14"
                                              VerticalContentAlignment="Center"
                                              FontWeight="Bold"
                                              Text="{Binding QueryText}"
-                                             Margin="10,0,40,0"/>
+                                             Margin="10,0,40,0" />
                                     <!-- 搜索按钮 -->
                                     <Button Style="{StaticResource WithoutButtonStyle}"
                                             Width="25"
@@ -93,9 +116,9 @@
                                             BorderThickness="0"
                                             Margin="0,0,5,0"
                                             Cursor="Hand"
-                                            Command="{Binding SearchCommand}" >
+                                            Command="{Binding SearchCommand}">
                                         <Button.Background>
-                                            <ImageBrush ImageSource="pack://application:,,,/Image/Search.png"/>
+                                            <ImageBrush ImageSource="pack://application:,,,/Image/Search.png" />
                                         </Button.Background>
                                     </Button>
                                 </Grid>
@@ -103,38 +126,61 @@
                         </StackPanel>
 
                         <!-- 补丁卡片展示 -->
-                        <Grid Grid.Row="1" Margin="10,20,10,10">
-                            <ScrollViewer  VerticalScrollBarVisibility="Auto" Padding="-9">
+                        <Grid Grid.Row="1"
+                              Margin="10,20,10,10">
+                            <ScrollViewer  VerticalScrollBarVisibility="Auto"
+                                           Padding="-9">
                                 <ItemsControl ItemsSource="{Binding PatchBriefsView}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <local:PatchBrief Command="{Binding DataContext.NpkStatusClickCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                                               PatchCommand="{Binding DataContext.PatchShowCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                                              Padding="5"/>
+                                                              Padding="5" />
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                     <!-- 此处设置面板，使得布局为方块。写在外面有问题 -->
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <WrapPanel/>
+                                            <WrapPanel />
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                 </ItemsControl>
                             </ScrollViewer>
-                            <Button Style="{StaticResource WithoutButtonStyle}" Content="+" Width="50" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20" Command="{Binding OpenWindowCommand}"  ></Button>
+                            <Button Style="{StaticResource WithoutButtonStyle}"
+                                    Content="+"
+                                    Width="50"
+                                    Height="50"
+                                    VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Right"
+                                    Margin="30"
+                                    Command="{Binding OpenWindowCommand}"></Button>
                         </Grid>
                     </Grid>
                 </TabItem>
-                <TabItem Style="{DynamicResource TabItemStyle1}" FontSize="19" Header="设置"  Width="100" Height="30">
-                    <TextBlock Text="还没想好放点啥"/>
+                <TabItem Style="{DynamicResource TabItemStyle1}"
+                         FontSize="19"
+                         Header="设置"
+                         Width="100"
+                         Height="30">
+                    <Grid>
+                        <TextBlock Text="还没想好放点啥" />
+                    </Grid>
+                    
                 </TabItem>
-                <TabItem Style="{DynamicResource TabItemStyle1}" FontSize="19" Header="关于"  Width="100" Height="30">
-                    <TextBlock Text="同样没想好放点啥"/>
+                <TabItem Style="{DynamicResource TabItemStyle1}"
+                         FontSize="19"
+                         Header="关于"
+                         Width="100"
+                         Height="30">
+                    <Grid>
+                        <TextBlock Text="同样没想好放点啥" />
+                    </Grid>
+                    
                 </TabItem>
             </TabControl>
         </Border>
 
         <!-- 主内容区域 -->
-       
+
     </Grid>
 </Window>
